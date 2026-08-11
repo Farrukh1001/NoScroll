@@ -98,4 +98,4 @@ First release.
 - Cloud backup and device transfer disabled so protection state cannot be rolled back by a restore
 - Privacy controls exempt from the waiting period
 
-[1.0.0]: https://github.com/OWNER/NoScroll/releases/tag/v1.0.0
+[1.0.0]: https://github.com/Farrukh1001/NoScroll/releases/tag/v1.0.0

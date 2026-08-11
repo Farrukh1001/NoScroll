@@ -239,7 +239,7 @@ keeps stopping, exempt NoScroll from battery optimisation.
 Requirements: JDK 17+, Android SDK with platform 36.
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Farrukh1001/NoScroll.git
 cd NoScroll
 echo "sdk.dir=/path/to/Android/Sdk" > local.properties
 

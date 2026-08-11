@@ -28,7 +28,7 @@ you want to be lazy" dialogs. Privacy controls are never delayed.
 ## Getting set up
 
 ```bash
-git clone <your-fork>
+git clone https://github.com/YOUR-USERNAME/NoScroll.git
 cd NoScroll
 echo "sdk.dir=/path/to/Android/Sdk" > local.properties
 ./gradlew test
