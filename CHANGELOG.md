@@ -74,6 +74,9 @@ First release.
   partial-versus-full-day comparison, no negative saving, and no minutes ever estimated from blocked
   attempts
 - 12-month default retention, configurable, deletable at any time
+- Local achievements — days inside the goal, five- and seven-day runs, a personal-best low day, and
+  reduction against your own earlier baseline — each requiring real history and stated as fact
+- Screen-time data can be exported as CSV, and the sanitised diagnostics report can be copied
 
 ### App
 

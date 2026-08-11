@@ -111,11 +111,24 @@ Delay arithmetic for the evening reminder across midnight, both DST transitions,
 timezones. Clamping instead of throwing. Never negative. There is no exact-alarm permission to test
 because none is requested.
 
+### Achievements — `AchievementsTest`
+
+A fresh install earns nothing. Days inside the goal counted over completed days only, never today.
+Streaks of five and seven, and a broken run ending the streak. A personal best requiring a week of
+baseline. A reduction measured across two full weeks, with an increase never dressed up as a
+reduction and a 2% difference treated as noise rather than an accomplishment.
+
 ### UI — `app/src/androidTest`
 
-Compose tests for onboarding gating, the Today dashboard, the Protect screen, the pending-change
-bundle, the extension flow, empty and permission-denied states, dark mode and large fonts. These need
-a device or emulator.
+Compose tests for the Today dashboard, the pending-change bundle, the extension flow, empty and
+permission-denied states, dark mode, large fonts and screen-reader descriptions. These need a device
+or emulator:
+
+```bash
+./gradlew connectedDebugAndroidTest
+```
+
+22 tests, verified on an API 36 emulator.
 
 ## Conventions
 

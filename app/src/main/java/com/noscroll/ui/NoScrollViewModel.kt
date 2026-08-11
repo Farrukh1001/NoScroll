@@ -48,6 +48,7 @@ data class NoScrollUiState(
     val comparisonWithYesterday: TimeSavedResult = TimeSavedResult.InsufficientData,
     val comparisonWithAverage: TimeSavedResult = TimeSavedResult.InsufficientData,
     val blockedToday: Int = 0,
+    val achievements: List<com.noscroll.domain.wellbeing.Achievement> = emptyList(),
     val lastMessage: String? = null,
     val countdown: CountdownState? = null,
     val extensionError: ExtensionRejection? = null,
@@ -73,6 +74,7 @@ class NoScrollViewModel(application: Application) : AndroidViewModel(application
     private val container: AppContainer = (application as NoScrollApplication).container
     private val engine = ProtectedSettingsEngine()
     private val timeSavedCalculator = TimeSavedCalculator()
+    private val achievementCalculator = com.noscroll.domain.wellbeing.AchievementCalculator()
 
     private val _state = MutableStateFlow(NoScrollUiState())
     val state: StateFlow<NoScrollUiState> = _state.asStateFlow()
@@ -137,13 +139,73 @@ class NoScrollViewModel(application: Application) : AndroidViewModel(application
                     .getOrDefault(UsageAggregate())
             }
             val now = LocalDateTime.now()
+            val prefs = container.appPreferences.current()
+            val achievements = runCatching {
+                achievementCalculator.evaluate(
+                    aggregate = aggregate,
+                    today = today,
+                    dailyGoalMinutes = prefs.dailyGoalMinutes,
+                    instagramGoalMinutes = prefs.instagramGoalMinutes,
+                )
+            }.getOrDefault(emptyList())
+
             _state.update {
                 it.copy(
                     today = today,
                     aggregate = aggregate,
+                    achievements = achievements,
                     comparisonWithYesterday = timeSavedCalculator.compareWithYesterday(aggregate, today, now.hour, now.minute),
                     comparisonWithAverage = timeSavedCalculator.compareWithAverage(aggregate, today, now.hour, now.minute),
                 )
+            }
+        }
+    }
+
+    /**
+     * Builds the sanitised diagnostics report for the copy button.
+     *
+     * Service and permission states, an error category, and version strings. Never a username,
+     * message, title, search, domain, or any raw accessibility text.
+     */
+    fun diagnosticsReport(): String {
+        val state = _state.value
+        return buildString {
+            appendLine("NoScroll diagnostics")
+            appendLine("app version: ${com.noscroll.BuildConfig.VERSION_NAME}")
+            appendLine("android sdk: ${android.os.Build.VERSION.SDK_INT}")
+            appendLine("accessibility connected: ${state.health.accessibilityConnected}")
+            appendLine("filter status: ${state.health.filterStatus}")
+            appendLine("vpn prepared: ${state.health.vpnPrepared}")
+            appendLine("usage access: ${state.health.usageAccessGranted}")
+            appendLine("notifications allowed: ${state.health.notificationsAllowed}")
+            appendLine("youtube music: ${state.health.youTubeMusicStatus}")
+            appendLine("rule set: ${state.health.ruleSetVersion}")
+            appendLine("last error category: ${state.health.lastErrorCategory ?: "none"}")
+            appendLine("analytics enabled: ${state.preferences.analyticsEnabled}")
+            appendLine("notification limit: ${state.preferences.notificationDailyLimit}")
+            appendLine("weakening delay hours: ${state.protection.int(SettingKey.WEAKENING_DELAY_HOURS)}")
+            appendLine("pending change: ${state.pending?.entries?.size ?: 0} entries")
+            appendLine("instagram budget minutes: ${state.protection.int(SettingKey.INSTAGRAM_BASE_LIMIT_MINUTES)}")
+            appendLine("blocked attempts today: ${state.blockedToday}")
+            appendLine("(contains no usernames, messages, titles, searches, domains or screen text)")
+        }
+    }
+
+    /**
+     * Exports wellbeing data as CSV.
+     *
+     * Aggregates only — a date, a package name, and a duration. This is the same data the Insights
+     * screen shows, in a form the user can keep. Nothing else in the app is exportable because
+     * nothing else is theirs to take.
+     */
+    fun exportWellbeingCsv(): String {
+        val state = _state.value
+        return buildString {
+            appendLine("date,package,foreground_millis")
+            state.aggregate.perDayPerPackage.toSortedMap().forEach { (day, packages) ->
+                packages.toSortedMap().forEach { (packageName, millis) ->
+                    appendLine("$day,$packageName,$millis")
+                }
             }
         }
     }

@@ -130,7 +130,10 @@ class ScreenTest {
         )
         compose.setContent { NoScrollTheme { TodayScreen(state) {} } }
 
-        compose.onNodeWithText("Explicit Content Shield").assertIsDisplayed()
+        // "Explicit Content Shield" appears twice here — once as the protection status row and once
+        // as the pending entry's label — so assert on the parts unique to the pending card.
+        compose.onNodeWithText("Waiting to apply").assertIsDisplayed()
+        compose.onNodeWithText("On → Off · Turns off explicit content shield.").assertIsDisplayed()
         compose.onNodeWithText("Applies in 2h 0m.").assertIsDisplayed()
     }
 

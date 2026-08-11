@@ -34,7 +34,7 @@ phone with the real third-party apps installed — no amount of unit testing sub
 | 27 | Default quota 2, hard maximum 3 | `QuotaConfig.effectiveLimit` | `NotificationQuotaTest` limit tests |
 | 28 | No raw browsing/accessibility/message/account data stored | `UiNode` is transient; no store has such a field | `PRIVACY.md`, code review, `ProtectionHealthTest.only an error category is recorded` |
 | 29 | Process death, reboot, rotation, timezone, updates recover safely | `TimeSource` two-clock model, `BootReceiver`, idempotent rollover | `ProtectedSettingsEngineTest` reboot/clock tests, `InstagramBudgetTest`, `UsageAggregatorTest` DST test |
-| 30 | Tests, lint and builds pass | — | `./gradlew test lint assembleDebug assembleRelease` |
+| 30 | Tests, lint and builds pass | — | `./gradlew clean test lint assembleDebug packageDist`; instrumentation tests on an API 36 emulator |
 | 31 | Signed APK and checksum in `dist/` | `packageDist` task | `dist/NoScroll-v1.0.0.apk` + `.sha256`, `apksigner verify` |
 | 32 | GPL-3.0-only and GitHub-ready | `LICENSE`, `.github/` | File listing |
 

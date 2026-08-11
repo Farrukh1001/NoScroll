@@ -1,5 +1,7 @@
 package com.noscroll.ui.screens
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.provider.Settings
 import androidx.compose.foundation.layout.Arrangement
@@ -41,6 +43,7 @@ import com.noscroll.ui.components.SectionCard
 @Composable
 fun SettingsScreen(viewModel: NoScrollViewModel, state: NoScrollUiState) {
     val context = LocalContext.current
+    val clipboard = remember { context.getSystemService(ClipboardManager::class.java) }
     var message by remember { mutableStateOf<String?>(null) }
     var confirmDelete by remember { mutableStateOf(false) }
 
@@ -209,6 +212,21 @@ fun SettingsScreen(viewModel: NoScrollViewModel, state: NoScrollUiState) {
                         )
                     }
                 }
+                TextButton(onClick = {
+                    // Export is a share, not an upload: the CSV goes wherever the user sends it and
+                    // nowhere else. It contains aggregates only — date, package, duration.
+                    val csv = viewModel.exportWellbeingCsv()
+                    context.startActivity(
+                        Intent.createChooser(
+                            Intent(Intent.ACTION_SEND).apply {
+                                type = "text/csv"
+                                putExtra(Intent.EXTRA_SUBJECT, "NoScroll screen-time export")
+                                putExtra(Intent.EXTRA_TEXT, csv)
+                            },
+                            "Export screen-time data",
+                        ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    )
+                }) { Text("Export screen-time data") }
                 TextButton(onClick = { confirmDelete = true }) { Text("Delete screen-time history") }
                 Text(
                     "Deleting history does not reset today's Instagram budget or any change that is " +
@@ -236,6 +254,12 @@ fun SettingsScreen(viewModel: NoScrollViewModel, state: NoScrollUiState) {
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
+                TextButton(onClick = {
+                    clipboard.setPrimaryClip(
+                        ClipData.newPlainText("NoScroll diagnostics", viewModel.diagnosticsReport())
+                    )
+                    message = "Diagnostics copied. It is safe to paste into an issue."
+                }) { Text("Copy diagnostics report") }
             }
         }
 

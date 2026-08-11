@@ -120,6 +120,22 @@ fun InsightsScreen(state: NoScrollUiState) {
             }
         }
 
+        if (state.achievements.isNotEmpty()) {
+            item {
+                SectionCard(title = "Worth noting") {
+                    state.achievements.forEach { achievement ->
+                        Text(achievement.title, style = MaterialTheme.typography.bodyLarge)
+                        Text(
+                            achievement.detail,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(bottom = 12.dp),
+                        )
+                    }
+                }
+            }
+        }
+
         item {
             SectionCard(title = "Blocked distractions") {
                 Text(
