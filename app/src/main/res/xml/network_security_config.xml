@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  NoScroll makes exactly one kind of network request: fetching a signed rule-set update. Cleartext
+  is off everywhere, and user-added CA certificates are not trusted, so a rule update cannot be
+  swapped out by anything sitting on the network. The signature check is the real gate; this is the
+  belt to its braces.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

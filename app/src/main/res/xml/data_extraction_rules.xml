@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Backups are off.
+
+  Restoring a NoScroll backup onto a device would be a way to roll protection state back to an older
+  snapshot: an older Instagram budget with time still on it, or a protected setting from before a
+  waiting period started. Keeping state device-local closes that hole, and it also means the app's
+  data never leaves the device through a cloud backup.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="root" />
+        <exclude domain="database" />
+        <exclude domain="sharedpref" />
+        <exclude domain="file" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="root" />
+        <exclude domain="database" />
+        <exclude domain="sharedpref" />
+        <exclude domain="file" />
+    </device-transfer>
+</data-extraction-rules>

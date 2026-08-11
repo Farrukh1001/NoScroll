@@ -1,0 +1,98 @@
+name: Bug report
+description: Something is not working as described
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before you write anything: **please do not include browsing history, search terms, message
+        content, or screenshots of your feed.** NoScroll deliberately keeps none of that, and an
+        issue should not be the thing that creates a record of it.
+
+        The diagnostics report in Settings is sanitised and safe to paste.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open …
+        2. Tap …
+        3. …
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part
+      options:
+        - YouTube Shorts
+        - YouTube Music
+        - Instagram budget
+        - Instagram detection (something counted or blocked that should not be)
+        - Explicit Content Shield
+        - Protected settings and waiting periods
+        - Screen-time insights
+        - Notifications
+        - Onboarding or permissions
+        - Something else
+    validations:
+      required: true
+
+  - type: input
+    id: android-version
+    attributes:
+      label: Android version
+      placeholder: "Android 14"
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: Device
+      placeholder: "Pixel 7a / Samsung S23"
+    validations:
+      required: true
+
+  - type: input
+    id: app-version
+    attributes:
+      label: NoScroll version
+      description: Settings → About
+      placeholder: "1.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: third-party-version
+    attributes:
+      label: Version of the affected app, if relevant
+      description: For detection bugs, the YouTube or Instagram version helps a great deal.
+      placeholder: "Instagram 320.0.0.42"
+
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics report
+      description: From Settings → Diagnostics. Sanitised — no usernames, messages, titles, searches or domains.
+      render: text
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Before submitting
+      options:
+        - label: I have not included browsing history, search terms, or message content
+          required: true
+        - label: I checked TROUBLESHOOTING.md
+          required: false

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Two downward chevrons over a solid bar: the scroll, and where it stops.
+  Drawn as paths so the icon stays sharp at every density and ships as a few hundred bytes.
+  Everything sits inside the 72dp safe zone so no mask crops it.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <path
+        android:pathData="M38,32 L54,48 L70,32"
+        android:strokeColor="#7FFFFFFF"
+        android:strokeWidth="7"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <path
+        android:pathData="M38,48 L54,64 L70,48"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="7"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <path
+        android:pathData="M38,76 L70,76"
+        android:strokeColor="#FF6FE3C4"
+        android:strokeWidth="7"
+        android:strokeLineCap="round" />
+</vector>

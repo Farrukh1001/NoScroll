@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">NoScroll</string>
+    <string name="shorts_link_label">Open as a single video</string>
+
+    <!-- Accessibility service -->
+    <string name="accessibility_service_label">NoScroll protection</string>
+    <string name="accessibility_service_summary">Blocks Shorts, limits Instagram scrolling, and filters explicit content.</string>
+    <string name="accessibility_service_description">NoScroll uses accessibility to see which screen of YouTube, YouTube Music or Instagram is open so it can mask Shorts, count Instagram scrolling time and block explicit pages in supported browsers. It only receives events from those apps, it never reads your messages, and nothing it sees is stored or sent anywhere.</string>
+
+    <!-- Notification channels -->
+    <string name="channel_status_name">Protection status</string>
+    <string name="channel_status_description">A quiet, permanent notice shown while the content filter is running. Android requires it.</string>
+    <string name="channel_updates_name">Daily summary and encouragement</string>
+    <string name="channel_updates_description">At most three messages a day, two by default.</string>
+    <string name="channel_health_name">Protection health</string>
+    <string name="channel_health_description">Tells you when a protection has stopped working.</string>
+
+    <string name="filter_running_title">Content filter running</string>
+    <string name="filter_running_body">Explicit Content Shield is active.</string>
+    <string name="filter_degraded_title">Content filter is not running</string>
+    <string name="filter_degraded_body">Supported browsers are blocked until it is restored.</string>
+
+    <!-- Blockers -->
+    <string name="blocker_shorts_title">YouTube Shorts are blocked</string>
+    <string name="blocker_shorts_action">Return to YouTube</string>
+    <string name="blocker_ytm_title">YouTube Music is blocked</string>
+    <string name="blocker_ytm_body">NoScroll does not allow YouTube Music.</string>
+    <string name="blocker_ytm_home">Return Home</string>
+    <string name="blocker_ytm_disable">Disable YouTube Music permanently</string>
+    <string name="blocker_instagram_title">Today\'s Instagram scrolling time is finished.</string>
+    <string name="blocker_instagram_body">DMs and Stories are still available.</string>
+    <string name="blocker_instagram_return">Return</string>
+    <string name="blocker_instagram_extra">Request Extra Time</string>
+    <string name="blocker_explicit_title">Explicit content blocked</string>
+    <string name="mask_shorts_label">Shorts hidden.</string>
+    <string name="collection_timer_running">Collection time is running</string>
+
+    <!-- Navigation -->
+    <string name="nav_today">Today</string>
+    <string name="nav_insights">Insights</string>
+    <string name="nav_protect">Protect</string>
+    <string name="nav_calendar">Calendar</string>
+    <string name="nav_settings">Settings</string>
+</resources>

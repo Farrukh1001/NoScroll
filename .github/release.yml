@@ -1,0 +1,49 @@
+# Configuration for GitHub's automatic release notes.
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+      - duplicate
+      - invalid
+      - question
+
+  categories:
+    - title: Protection changes
+      labels:
+        - protection
+        - youtube
+        - instagram
+        - filter
+
+    - title: Privacy and security
+      labels:
+        - privacy
+        - security
+
+    - title: Fixes
+      labels:
+        - bug
+
+    - title: False positives fixed
+      labels:
+        - false-positive
+
+    - title: Accessibility
+      labels:
+        - accessibility
+
+    - title: New
+      labels:
+        - enhancement
+
+    - title: Documentation
+      labels:
+        - documentation
+
+    - title: Dependencies
+      labels:
+        - dependencies
+
+    - title: Everything else
+      labels:
+        - "*"

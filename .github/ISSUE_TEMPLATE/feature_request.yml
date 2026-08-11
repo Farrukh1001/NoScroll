@@ -1,0 +1,63 @@
+name: Feature request
+description: Suggest something NoScroll should do
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please read the "What will probably be declined" section of CONTRIBUTING.md first — a few
+        categories are settled product decisions rather than missing features, and it will save you
+        writing this up.
+
+        In particular: anti-uninstall behaviour, telemetry, blocking gore or violence, storing
+        browsing history, and an emergency bypass for explicit content are all deliberate absences.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve
+      description: Describe the situation, not the solution. What happens today that shouldn't?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you have in mind
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part
+      options:
+        - YouTube
+        - YouTube Music
+        - Instagram
+        - Explicit Content Shield
+        - Protected settings
+        - Screen-time insights
+        - Notifications
+        - Accessibility
+        - Something else
+    validations:
+      required: true
+
+  - type: textarea
+    id: privacy
+    attributes:
+      label: Would this need new data
+      description: >
+        Would it require storing anything NoScroll currently does not — browsing history, search
+        terms, account identity, screen content? If so, is there a design that avoids it?
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Before submitting
+      options:
+        - label: I read the declined-features list in CONTRIBUTING.md
+          required: true
+        - label: This does not require weakening the app's privacy or honesty guarantees
+          required: true

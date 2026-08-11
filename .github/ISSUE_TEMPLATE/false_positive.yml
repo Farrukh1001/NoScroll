@@ -1,0 +1,78 @@
+name: Content filter false positive
+description: The Explicit Content Shield blocked something it should not have
+labels: [bug, filter, false-positive]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        These are treated as serious bugs — especially anything medical, sexual-health, educational,
+        academic, news, or abuse-prevention related. Blocking a helpline search is a real harm; a
+        missed block is not.
+
+        **You do not need to tell us the domain or the search.** The app keeps no record of either,
+        so there is nothing to attach even if you wanted to. The category and roughly what you were
+        doing is enough to fix the rule.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: What kind of thing was blocked
+      options:
+        - Medical or health information
+        - Sexual-health or contraception information
+        - Sex education or teaching material
+        - Abuse prevention, safeguarding, or a support service
+        - Academic or research material
+        - News or journalism
+        - Manga, manhwa, or comics without explicit sexual content
+        - Gore, violence, horror, or crime content
+        - An ordinary site with no adult content at all
+        - Something else
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: What were you doing
+      description: A sentence is plenty. No URLs or search terms needed.
+      placeholder: "Looking up symptoms on a national health service site."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: layer
+    attributes:
+      label: How was it blocked
+      options:
+        - The page did not load at all (DNS filter)
+        - A NoScroll blocker covered the screen (browser guard)
+        - A search was redirected with SafeSearch added
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: rule-version
+    attributes:
+      label: Rule-set version
+      description: Settings → Diagnostics
+      placeholder: "bundled-1.0.0"
+
+  - type: input
+    id: app-version
+    attributes:
+      label: NoScroll version
+      placeholder: "1.0.0"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Before submitting
+      options:
+        - label: I have not included the specific domain or search term
+          required: false
+        - label: I understand I can add it to my local allowlist as a workaround (this goes through the waiting period)
+          required: false

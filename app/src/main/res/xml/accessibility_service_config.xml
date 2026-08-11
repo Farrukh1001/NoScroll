@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The accessibility service is scoped as tightly as the platform allows.
+
+  android:packageNames limits it to the apps NoScroll actually protects, so events from banking
+  apps, messengers, password managers and everything else on the device are never delivered to this
+  process in the first place. That is a stronger privacy guarantee than filtering after the fact.
+
+  flagReportViewIds is required: detection works off stable view resource ids (clips_viewer,
+  reel_recycler and friends) rather than off the words on screen, which is both more reliable across
+  languages and far less sensitive than reading text.
+-->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeWindowStateChanged|typeWindowContentChanged|typeWindowsChanged"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagReportViewIds|flagRetrieveInteractiveWindows|flagIncludeNotImportantViews"
+    android:canRetrieveWindowContent="true"
+    android:description="@string/accessibility_service_description"
+    android:notificationTimeout="100"
+    android:packageNames="com.google.android.youtube,com.google.android.apps.youtube.music,com.instagram.android,com.android.chrome,com.chrome.beta,com.chrome.dev,org.mozilla.firefox,org.mozilla.focus,com.brave.browser,com.duckduckgo.mobile.android,com.microsoft.emmx,com.opera.browser,com.opera.mini.native,com.sec.android.app.sbrowser,com.vivaldi.browser,com.kiwibrowser.browser"
+    android:settingsActivity="com.noscroll.ui.MainActivity"
+    android:summary="@string/accessibility_service_summary" />

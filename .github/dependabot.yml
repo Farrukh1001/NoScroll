@@ -1,0 +1,37 @@
+version: 2
+
+updates:
+  - package-ecosystem: gradle
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+    commit-message:
+      prefix: "deps"
+    groups:
+      # AndroidX and Compose move together; one PR per group beats fifteen separate ones.
+      androidx:
+        patterns:
+          - "androidx.*"
+      kotlin:
+        patterns:
+          - "org.jetbrains.kotlin*"
+    ignore:
+      # The Compose BOM pins the Compose libraries; bumping them individually defeats the point.
+      - dependency-name: "androidx.compose.ui:*"
+      - dependency-name: "androidx.compose.material3:*"
+      - dependency-name: "androidx.compose.material:*"
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    labels:
+      - dependencies
+      - ci
+    commit-message:
+      prefix: "ci"
